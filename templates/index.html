@@ -9,26 +9,20 @@
 </head>
 <body>
     <div class="nav">
-        <p>
-            <div style="width: 30%; float: left;">
-                <h1>Generative AI - Story Teller </h1>
-            </div>
+        <p style="margin: 0px 0px 0px 0px;">
+                <h1 style="width: 30%; float: left; margin: 5px 0px 0px 0px">Generative AI - Story Teller </h1>
             <div style="width: 60%;">
             </div>    
-            <div style="width: 5%; float: right;">
-                <form action="/">
+                <form action="/" style="width: 5%; float: right; margin: 0px 0px 0px 0px">
                     <button class="btn" style="margin-top: 10px; height: 40px; width: 40px" type="Submit"><i class="fa fa-home"></i></button>
                 </form>
-               
-            </div>
-            
-        </p>
-
-        
+        </p>    
+    </div>
+    <div class="floating-div">
+        {% block content %}
+        {% endblock %}
     </div>
 
-    {% block content %}
-    {% endblock %}
 
 </body>
 </html>

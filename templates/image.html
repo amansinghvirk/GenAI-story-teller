@@ -3,41 +3,40 @@
 {% block content %}
     <div class="inputoptions">
         <div style="height: 5px"></div> 
-        <h1>Generate Story from image </h1>
+        <h1>Generate story from image ... </h1>
 
-        <img src= "{{image}}" style="display: block; width: 100%; height: 60%" >
+        <img src= "{{image}}" style="display: block; width: 100%; height: 50%" >
         <div style="height: 10px"></div> 
         <form action="/imagestory">
             <input type="hidden" name="contextimg" id="contextimg" value="{{ image }}" />
 
             <div  style="height: 20px">
-                <div style="width: 45%; float: left; margin-top: 5px">Max length of the Story (in words)</div>
-                <div style="width: 5%; float: left; margin-top: 5px"></div>
-                <div style="width: 50%; float: left; margin-top: 5px">
+                <div style="width: 45%; float: left; margin-top: 5px">Max length of the Story (max. 2000 words) </div>
+                <div style="width: 2%; float: left; margin-top: 5px"></div>
+                <div style="width: 53%; float: left; margin-top: 5px">
                     <input type="text" name="n_words" id="n_words" placeholder="Enter the max words of the story"> 
                 </div>
             </div>
             <div style="height: 10px"></div> 
             <div  style="height: 20px">
                 <div style="width: 45%; float: left; margin-top: 5px">Enter theme for the story:</div>
-                <div style="width: 5%; float: left; margin-top: 5px"></div>
-                <div style="width: 50%; float: left; margin-top: 5px">
-                    <input type="text" name="inspiration" id="inspiration" value="General" 
-                        placeholder="Enter any inspiration for the story e.g. any show, any portrait, artist or keep blank"> 
-                </div>
-            </div>
-
-            <div style="height: 10px"></div> 
-            <div  style="height: 20px">
-                <div style="width: 45%; float: left; margin-top: 5px">Enter visual style for the story:</div>
-                <div style="width: 5%; float: left; margin-top: 5px"></div>
-                <div style="width: 50%; float: left; margin-top: 5px">
+                <div style="width: 2%; float: left; margin-top: 5px"></div>
+                <div style="width: 53%; float: left; margin-top: 5px">
                     <input 
                     type="text" 
                     name="theme" 
                     id="theme" 
                     value="Cinematic" 
                     placeholder="Enter any theme e.g. comic, anime, wild or keep it blank">
+                </div>
+            </div>
+
+            <div style="height: 10px"></div> 
+            <div  style="height: 20px">
+                <div style="width: 45%; float: left; margin-top: 5px">Enter additional context e.g. visual style, inspiration:</div>
+                <div style="width: 2%; float: left; margin-top: 5px"></div>
+                <div style="width: 53%; float: left; margin-top: 5px">
+                    <textarea name="inspiration" id="inspiration" rows="5" cols="30" placeholder="Enter additional context e.g. visual style, inspiration"></textarea> 
                 </div>
             </div>
             <div style="height: 10px"></div>      

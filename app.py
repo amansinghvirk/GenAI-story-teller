@@ -6,6 +6,17 @@ from markupsafe import Markup
 
 app = Flask(__name__)
 
+# check if app is running locally or on Google Cloud Run
+# if running locally load the environment variables 
+# else set Application Default Credentials for vertexai authentication
+if 'K_REVISION' in os.environ:
+    # os.environ['GOOGLE_APPLICATION_CREDENTIALS']=os.getenv("CREDENTIALS_FILE")
+    logging.info("Runnning app in Cloud Run")
+else:
+    from dotenv import load_dotenv
+    load_dotenv()
+    logging.info("Runnning app locally..")
+
 @app.route("/")
 def home():
     return render_template("home.html")

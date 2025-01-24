@@ -6,12 +6,16 @@ from src.story_image import StoryImageGen
 from src.format_story import FormatStory
 from src.theme_generator import StoryThemeGenerator
 
+MAX_WORDS = 2000
+
 def build_story(
     topic: str=None, image_file: str=None, context: str=None,
     story_theme: str = "General", story_inspiration: str = "General",
     n_words: int = 200
 ):
     
+    if n_words > MAX_WORDS:
+        n_words = MAX_WORDS
     generator = StoryGenerator(story_theme=story_theme, story_inspiration=story_inspiration, n_words=n_words)
     if topic:
         generator.set_context(topic=topic)
