@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="main">
+        <h1>Story Teller App </h1>
+        <div style="height: 150px; width: 300px; margin: auto; padding-top: 15px; box-shadow: 3px 3px 2px 2px rgb(115, 195, 222); border-radius: 15px;">
+            <h3>Generate story from the image </h3>
+            <form action = "/image" method="POST" enctype="multipart/form-data"> 
+                <input class="button2" type="file" name="file" multiple /> 
+                <div style="height: 10px"></div> 
+                <input class="button2" type = "submit" value="Upload"> 
+            </form> 
+        </div>
+        <div style="height: 30px"></div>
+        <div style="height: 150px; width: 300px; margin: auto; padding-top: 15px; box-shadow: 3px 3px 2px 2px rgb(115, 195, 222); border-radius: 15px;">
+            <h3>Generate story from the context </h3>
+            <form action="/context"> 
+                <button class="button2" type="Generate from Context">Generate Story</button>
+            </form> 
+        </div>
+    </div>
+{% endblock %}

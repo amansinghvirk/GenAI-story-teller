@@ -1,4 +1,5 @@
 import os
+import logging
 import google.generativeai as genai
 from vertexai.vision_models import ImageGenerationModel
 
@@ -17,18 +18,18 @@ class StoryImageGen:
 
         self.prompt = image_prompt
         while self.n_retries <= 6:
-            print(f"Image generation for the story, try {self.n_retries}")
+            logging.info(f"Image generation for the story, try {self.n_retries}")
             try:
                 self.image = self.model.generate_images(prompt=self.prompt)[0]
                 self.n_retries = 1
                 break
             except Exception as e:
                 self.n_retries += 1
-                print(f"Error generating image: {e}, trying again, try: {self.n_retries}")
+                logging.info(f"Error generating image: {e}, trying again, try: {self.n_retries}")
                 if self.n_retries <= 2:
                     continue
                 elif (self.n_retries > 2) and (self.n_retries <=5):
-                    print(f"Error generating image: {e}, trying with improved prompt, try: {self.n_retries}")
+                    logging.info(f"Error generating image: {e}, trying with improved prompt, try: {self.n_retries}")
                     self.improve_prompt()
                     continue
                 else:
@@ -54,9 +55,9 @@ class StoryImageGen:
             {self.prompt}
         """
 
-        print(f"ORIGINAL_PROMPT: {self.prompt}")
+        logging.info(f"ORIGINAL_PROMPT: {self.prompt}")
         self.prompt = self.language_model.generate_content(prompt_to_lang_model).text
-        print(f"IMPROVED_PROMPT: {self.prompt}")
+        logging.info(f"IMPROVED_PROMPT: {self.prompt}")
 
     
     def save_image(self, image_file):

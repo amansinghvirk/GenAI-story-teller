@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Story Teller</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet" />
+</head>
+<body>
+    <div class="nav">
+        <p style="margin: 0px 0px 0px 0px;">
+                <h1 style="width: 30%; float: left; margin: 5px 0px 0px 0px">Generative AI - Story Teller </h1>
+            <div style="width: 60%;">
+            </div>    
+                <form action="/" style="width: 5%; float: right; margin: 0px 0px 0px 0px">
+                    <button class="btn" style="margin-top: 10px; height: 40px; width: 40px" type="Submit"><i class="fa fa-home"></i></button>
+                </form>
+        </p>    
+    </div>
+    <div class="floating-div">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+</body>
+</html>

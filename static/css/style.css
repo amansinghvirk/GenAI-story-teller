@@ -1,0 +1,81 @@
+body {
+    margin: 25px;
+    background-color: #6B6B6B;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    color: #A5A5A5;
+
+}
+
+.nav {
+    background-color: #282828;
+    position:fixed;  
+    z-index:1; /*Add this*/
+    width:98%;
+    height:60px;
+    text-align:center;
+    vertical-align:middle;
+    line-height:50px;
+    top:5px;
+    left: 10px;
+    color: #A5A5A5;
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+ 
+}
+
+.floating-div {
+    position: absolute; /* Makes the div stay in place while the page scrolls */
+    top: 80px; /* Centers the div vertically */
+    left: 50%; /* Centers the div horizontally */
+    transform: translate(-50%, 0%); /* Adjusts for the center positioning */
+    z-index: 999; /* Ensures the div appears on top of other elements */
+  }
+  
+
+.main {
+    height: 600px;
+    width: 600px;
+    margin: auto;
+    text-align: center;
+    background-color: #282828;
+    color: #A5A5A5;
+    box-shadow: 3px 3px 2px 2px rgb(115, 195, 222); 
+    border-radius: 15px;
+}
+
+.inputoptions {
+    height: 630px;
+    width: 600px;
+    margin: auto;
+    text-align: center;
+    background-color: #282828;
+    color: #A5A5A5;
+    box-shadow: 3px 3px 2px 2px rgb(115, 195, 222); 
+    border-radius: 25px;
+}
+
+.button {
+    background-color: rgb(5, 114, 8);
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+  .button2 {
+    background-color: rgb(5, 114, 8); 
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 6px;
+  }
