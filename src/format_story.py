@@ -1,13 +1,13 @@
-```
 """
 Module for creating and formatting a story with HTML.
 """
+
 
 class FormatStory:
     """
     A class to format and structure a story using HTML.
 
-    This class allows adding a title, introduction, and multiple parts (sections) 
+    This class allows adding a title, introduction, and multiple parts (sections)
     with images and text. The story is formatted with HTML and can be saved to a file.
 
     Attributes:
@@ -40,12 +40,12 @@ class FormatStory:
         Args:
             title (str): The title of the story.
         """
-        self.title = f'''
+        self.title = f"""
             <div style="text-align: center"><h1>{title}</h1></div>
-        '''
+        """
 
     def add_introduction(self, introduction):
-         """
+        """
         Adds an introduction to the story.
 
         The introduction is wrapped in a <p> tag.
@@ -53,17 +53,17 @@ class FormatStory:
         Args:
             introduction (str): The introduction of the story.
         """
-        self.story_intro = f'''
+
+        self.story_intro = f"""
             <p>{introduction}</p>
 
-        '''
-
+        """
 
     def add_part(self, image_path, story, section, back_color, font_color):
         """
         Adds a part (section) to the story.
 
-        Each part includes an image and text. The layout alternates between 
+        Each part includes an image and text. The layout alternates between
         having the image on the left or right based on whether the section number is even or odd.
 
         Args:
@@ -75,7 +75,7 @@ class FormatStory:
         """
 
         if section % 2 == 0:
-            part = f'''
+            part = f"""
             <div style="height: 10px"></div>
             <div style="background-color: {back_color};  margin: auto; box-shadow: 2px 2px 3px 3px {font_color}; border-radius: 25px;">
                 <table style="margin: auto; color: {font_color}; table-layout: fixed; width: 980px; height: 300px; padding: 0px 0px 0px 0px; margin-left: 0px;">
@@ -86,9 +86,9 @@ class FormatStory:
                 </tr>
                 </table>
             </div>
-            '''
+            """
         else:
-            part = f'''
+            part = f"""
             <div style="height: 10px"></div>
             <div style="background-color: {back_color};  margin: auto; box-shadow: 2px 2px 3px 3px {font_color}; border-radius: 25px;">
                 <table style="margin: auto; color: {font_color}; table-layout: fixed; width: 980px; height: 300px; padding: 0px 0px 0px 0px; margin-right: 0px;">
@@ -100,9 +100,8 @@ class FormatStory:
                 </table>
             </div>
 
-            '''
+            """
         self.story_parts = self.story_parts + "\n" + part
-
 
     def compile_story(self):
         """
@@ -111,7 +110,7 @@ class FormatStory:
         This combines the title, introduction, and all story parts into a single HTML string
         that represents the complete formatted story.
         """
-        self.story = f'''
+        self.story = f"""
                 <div style="background-color: {self.background_color}; font-family: {self.font_family};
                     max-width: 1000px; padding: 10px;   margin: auto;
                     padding: 10px; box-shadow: 2px 2px 4px 4px {self.font_color}; color: {self.font_color}">
@@ -119,7 +118,7 @@ class FormatStory:
                     <div style="font-size: 20px; text-align: center;">{self.story_intro}</div>
                     {self.story_parts}
                 </div>
-        '''
+        """
 
     def get_story(self):
         """
@@ -129,7 +128,6 @@ class FormatStory:
             str: The complete HTML story.
         """
         return self.story
-    
 
     def save_story(self, story_path):
         """

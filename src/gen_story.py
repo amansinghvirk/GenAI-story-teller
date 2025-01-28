@@ -55,7 +55,7 @@ class StoryGenerator:
         image_to_text_model: The language model used for processing image content.
         llm: Langchain wrapper around the Gemini model.
         story_theme (str): The theme of the story (e.g., "General", "Fantasy").
-        story_inspiration (str): The inspiration for the story 
+        story_inspiration (str): The inspiration for the story
             (e.g., "General", "Historical event").
         n_words (int): The desired total word count for the story.
     """
@@ -71,7 +71,7 @@ class StoryGenerator:
 
         Args:
             story_theme (str, optional): The theme of the story. Defaults to "General".
-            story_inspiration (str, optional): The inspiration for the story. 
+            story_inspiration (str, optional): The inspiration for the story.
                 Defaults to "General".
             n_words (int, optional): The desired word count for the story. Defaults to 200.
         """
@@ -313,7 +313,7 @@ class StoryGenerator:
                 *   **Neutral & Respectful Language:** Use respectful and neutral language, avoiding any terms that could be considered biased or discriminatory.
             6.  **Character Consistency:** If the image prompt includes any characters (persons, animals, imaginary figures), ensure that subsequent image prompts maintain consistent character details 
                 *  Following are some examples
-                    *   ** for humans appearance, clothing, size, age, skin tone, race, facial features and any distinctive features
+                    *   ** for humans characters appearance, clothing, size, age, skin tone, race, facial features and any distinctive features
                     *   ** for male characters, hairs, head wears, facial hairs, clothing styles
                     *   ** for female characters, dresses, makeup, hairstyle, hair colors, skin tones anything which is distinctive
                     *   ** for non humans and other characters keep the specific details to make the consistent characters 

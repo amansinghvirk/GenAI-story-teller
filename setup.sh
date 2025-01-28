@@ -5,10 +5,10 @@
 
 # --- Environment Variables ---
 # Set environment variables for the project, region, service accounts, and application specifics.
-export PROJECT_ID="google-project-name"                         # Google Cloud Project ID.
+export PROJECT_ID=gcp-project-name                           # Google Cloud Project ID.
 export REGION="us-central1"                                 # Google Cloud Region to deploy resources in.
-export SVC_ACCOUNT="service-account-name"                       # Service account name for the application.
-export REPO="story-teller-sp-repo"                           # Artifact Registry repository name for docker images.
+export SVC_ACCOUNT=service-account                      # Service account name for the application.
+export REPO="story-teller-sp-repo"                          # Artifact Registry repository name for docker images.
 export SECRET_ID="STORY_TELLER_APP"                         # Secret Manager secret ID to store service account credentials.
 export APP_NAME="story-teller"                              # Name of the Cloud Run application.
 export APP_VERSION="0.1"                                    # Version of the application being deployed.
@@ -35,7 +35,7 @@ echo $SVC_ACCOUNT_EMAIL
 
 # Create and save the service account's JSON credentials key to a local path.
 # IMPORTANT: Ensure the path `<local-path-to-save-json-file>` is accessible and secure
-gcloud iam service-accounts keys create /c/mydata/projects/keys/story-teller.json \
+gcloud iam service-accounts keys create `<local-path-to-save-json-file>` \
   --iam-account=$SVC_ACCOUNT_EMAIL
 
 # Grant the service account the `aiplatform.user` role to access Vertex AI resources
@@ -62,7 +62,7 @@ gcloud secrets create $SECRET_ID --replication-policy="automatic"
 
 # Add the service account's JSON credentials to the Secret Manager.
 # The `-` indicates reading the data from the standard input, which is piped from the cat command
-cat /c/mydata/projects/keys/story-teller.json | gcloud secrets versions add $SECRET_ID --data-file=-
+cat `<local-path-to-save-json-file>` | gcloud secrets versions add $SECRET_ID --data-file=-
 
 # Grant the service account the `secretmanager.secretAccessor` role to access the secret.
 gcloud secrets add-iam-policy-binding $SECRET_ID \

@@ -2,6 +2,19 @@
 
 This Flask-based web application allows users to generate stories based on either a text context or an uploaded image. It leverages Google's Generative AI models (both Language and Vision) to create engaging narratives and visuals.
 
+# Generated Story Samples
+
+![alt text](static/images/The-Unpolished-Gem.png)
+
+![alt text](static/images/s1-Story.png)
+
+![alt text](static/images/s3-story.png)
+
+![alt text](static/images/s4-sunset-serended.png)
+
+![alt text](static/images/s2-The-Unspoken-Truth.png)
+
+
 ## Project Structure
 
 The project is organized as follows:

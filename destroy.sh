@@ -4,9 +4,9 @@
 
 # --- Environment Variables ---
 # Set environment variables for the project, region, service accounts, and application specifics.
-export PROJECT_ID="google-project-name"                         # Google Cloud Project ID.
+export PROJECT_ID=gcp-project-name                           # Google Cloud Project ID.
 export REGION="us-central1"                                 # Google Cloud Region to deploy resources in.
-export SVC_ACCOUNT="service-account-name"                       # Service account name for the application.
+export SVC_ACCOUNT=service-account                      # Service account name for the application.
 export REPO="story-teller-sp-repo"                           # Artifact Registry repository name for docker images.
 export SECRET_ID="STORY_TELLER_APP"                         # Secret Manager secret ID to store service account credentials.
 export APP_NAME="story-teller"                              # Name of the Cloud Run application.

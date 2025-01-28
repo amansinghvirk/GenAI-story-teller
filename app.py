@@ -140,7 +140,7 @@ def generate_story_from_image():
     )
 
     save_story(story)
-    return render_template("story.html")
+    return render_template("story.html", story=Markup(story))
 
 
 def save_story(story):
@@ -158,9 +158,6 @@ def save_story(story):
         + story
         + """\n{% endblock %}"""
     )
-
-    with open("templates/story.html", "w") as f:
-        f.write(html)
 
     with open("templates/story_to_print.html", "w") as f:
         f.write(story)
