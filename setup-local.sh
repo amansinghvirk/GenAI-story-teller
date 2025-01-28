@@ -5,18 +5,9 @@
 
 # --- Environment Variables ---
 # Set environment variables for the project, region, service accounts, and application specifics.
-export PROJECT_ID=prj-smart-news                            # Google Cloud Project ID.
+export PROJECT_ID="google-project-name"                         # Google Cloud Project ID.
 export REGION="us-central1"                                 # Google Cloud Region to deploy resources in.
-export SVC_ACCOUNT="story-teller-sp"                        # Service account name for the application.
-export REPO="story-teller-sp-repo"                           # Artifact Registry repository name for docker images.
-export SECRET_ID="STORY_TELLER_APP"                         # Secret Manager secret ID to store service account credentials.
-export APP_NAME="story-teller"                              # Name of the Cloud Run application.
-export APP_VERSION="0.1"                                    # Version of the application being deployed.
-export CREDENTIALS_FILE="/secrets/gemini-credentials.json"  # Path of the credentials file within the container.
-export LANGUAGE_MODEL="gemini-2.0-flash-exp"                # Language model to be used in the application
-export VISION_MODEL="imagegeneration@006"                   # Vision model to be used in the application
-export IMAGE_TO_TEXT_MODEL="gemini-1.5-pro"
-
+export SVC_ACCOUNT="service-account-name"                       # Service account name for the application.
 
 # Get the project number.
 export PROJECT_NUMBER=$(gcloud projects describe "$PROJECT_ID" --format="value(projectNumber)")
@@ -35,7 +26,7 @@ echo $SVC_ACCOUNT_EMAIL
 
 # Create and save the service account's JSON credentials key to a local path.
 # IMPORTANT: Ensure the path `<local-path-to-save-json-file>` is accessible and secure
-gcloud iam service-accounts keys create /c/mydata/projects/keys/story-teller.json \
+gcloud iam service-accounts keys create `<local-path-to-save-json-file>` \
   --iam-account=$SVC_ACCOUNT_EMAIL
 
 # Grant the service account the `aiplatform.user` role to access Vertex AI resources

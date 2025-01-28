@@ -1,3 +1,8 @@
+"""
+This module provides functionality to generate a story, including text and images, based on a given context or image.
+It uses several helper classes to generate the story text, images, themes, and finally formats it to html.
+"""
+
 import os
 import logging
 from PIL import Image
@@ -8,18 +13,35 @@ from src.theme_generator import StoryThemeGenerator
 
 MAX_WORDS = 2000
 
+
 def build_story(
-    topic: str=None, image_file: str=None, context: str=None,
-    story_theme: str = "General", story_inspiration: str = "General",
-    n_words: int = 200
+    image_file: str = None,
+    context: str = None,
+    story_theme: str = "General",
+    story_inspiration: str = "General",
+    n_words: int = 200,
 ):
-    
+    """
+    Builds a story by generating text, images, and formatting it into HTML.
+
+    Args:
+        image_file (str, optional): Path to an image file to use as context for the story. Defaults to None.
+        context (str, optional): Text context to use for the story if no image is provided. Defaults to None.
+        story_theme (str, optional): The theme of the story. Defaults to "General".
+        story_inspiration (str, optional): The inspiration for the story. Defaults to "General".
+        n_words (int, optional): The desired number of words for the story. Defaults to 200.
+
+    Returns:
+        str: An HTML string representing the generated story.
+    """
+
     if n_words > MAX_WORDS:
         n_words = MAX_WORDS
-    generator = StoryGenerator(story_theme=story_theme, story_inspiration=story_inspiration, n_words=n_words)
-    if topic:
-        generator.set_context(topic=topic)
-    elif image_file:
+    generator = StoryGenerator(
+        story_theme=story_theme, story_inspiration=story_inspiration, n_words=n_words
+    )
+
+    if image_file:
         img = Image.open(image_file)
         generator.set_image_context(img=img)
     else:
@@ -48,8 +70,7 @@ def build_story(
     story_formmater = FormatStory(
         background_color=story_theme.get("BackgroundColor"),
         font_color=story_theme.get("FontColor"),
-        font_family=story_theme.get("FontFamily")
-
+        font_family=story_theme.get("FontFamily"),
     )
     story_formmater.add_title(title=story.get("title"))
     story_formmater.add_introduction(introduction=story.get("introduction"))
@@ -60,13 +81,15 @@ def build_story(
         story_part_clean = story_part.get("story").encode("utf-8", "ignore")
         story_part_clean = story_part_clean.decode()
         story_formmater.add_part(
-            image_path=image_file_path, story= story_part_clean,
+            image_path=image_file_path,
+            story=story_part_clean,
             section=idx,
             back_color=story_theme.get("BackgroundColor"),
             font_color=story_theme.get("FontColor"),
         )
-    
-    story_formmater.compile_story()
-    #story_formmater.save_story(os.path.join("templates", "story2.html"))
 
-    return story_formmater.get_story()
+    story_formmater.compile_story()
+
+    html_story = story_formmater.get_story()
+
+    return html_story

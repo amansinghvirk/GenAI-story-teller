@@ -1,3 +1,7 @@
+"""
+Module for generating a story theme based on an image and a text description of the story theme.
+"""
+
 import os
 import base64
 import google.generativeai as genai
@@ -10,27 +14,69 @@ from langchain_core.exceptions import OutputParserException
 
 
 class StoryTheme(BaseModel):
-    BackgroundColor: str = Field(..., title="ComponentTheme", description="Background color for the web page")
-    FontColor:  str = Field(..., title="FinalTheme", description="Font color for the web page")
-    FontFamily:  str = Field(..., title="FinalTheme", description="Font to be used to present the story")
+    """
+    Data model for representing a story's visual theme.
+
+    Attributes:
+        BackgroundColor (str): Background color for the web page.
+        FontColor (str): Font color for the web page.
+        FontFamily (str): Font to be used to present the story.
+    """
+
+    BackgroundColor: str = Field(
+        ..., title="ComponentTheme", description="Background color for the web page"
+    )
+    FontColor: str = Field(
+        ..., title="FinalTheme", description="Font color for the web page"
+    )
+    FontFamily: str = Field(
+        ..., title="FinalTheme", description="Font to be used to present the story"
+    )
 
 
 class StoryThemeGenerator:
+    """
+    A class to generate a cohesive story theme based on an image and story context.
+
+    This class uses Google's Generative AI to analyze an image and extract a color palette.
+    It then uses this palette, along with the story context, to generate a unified theme including background color, font color, and font family.
+
+    Attributes:
+        image_to_text_model (genai.GenerativeModel): Google Generative AI model for image-to-text tasks.
+        llm (GoogleGenerativeAI): Langchain wrapper for Google's generative AI model.
+        proposed_theme (str): A string describing the theme or context of the story.
+        themes (list): A list of extracted color palettes (JSON strings).
+    """
 
     def __init__(self, story_theme):
+        """
+        Initializes the StoryThemeGenerator with a story context.
+
+        Args:
+            story_theme (str): A string describing the theme or context of the story.
+        """
         genai.configure()
-        self.image_to_text_model = genai.GenerativeModel(os.getenv('IMAGE_TO_TEXT_MODEL'))
-        self.llm = GoogleGenerativeAI(model=os.getenv('IMAGE_TO_TEXT_MODEL'))
+        self.image_to_text_model = genai.GenerativeModel(
+            os.getenv("IMAGE_TO_TEXT_MODEL")
+        )
+        self.llm = GoogleGenerativeAI(model=os.getenv("IMAGE_TO_TEXT_MODEL"))
         self.proposed_theme = story_theme
         self.themes = []
 
-
     def extract_image_theme(self, image_file) -> str:
+        """
+        Extracts a color palette from an image file.
 
+        This method analyzes the provided image and identifies a four-color palette,
+        returning it as a JSON string in the themes list.
+
+        Args:
+            image_file (str): Path to the image file.
+
+        Returns:
+            None
+        """
         self.image = Image.open(image_file)
-        # with open(image_file, "rb") as f:
-        #     self.image = base64.b64encode(f.read()).decode("utf-8")
-
 
         prompt = """
             You are an expert in web design, color theory, and user experience. Your task is to analyze a provided image and extract a harmonious color palette suitable for a webpage displaying that image alongside text content.
@@ -80,10 +126,24 @@ class StoryThemeGenerator:
         """
 
         self.image_prompt = [prompt, self.image]
-        self.themes.append(self.image_to_text_model.generate_content(self.image_prompt).text)
+        self.themes.append(
+            self.image_to_text_model.generate_content(self.image_prompt).text
+        )
 
     def get_story_theme(self):
+        """
+        Generates a unified story theme from the extracted color palette and story context.
 
+        This method takes the color palettes extracted from images and the story context,
+        then uses the LLM to select an appropriate background color, font color, and font family,
+        returning the result as a `StoryTheme` object.
+
+        Returns:
+            StoryTheme: A `StoryTheme` object containing the final theme.
+
+        Raises:
+            OutputParserException: if the output is not in the format we expected.
+        """
         themes = "\n, ".join(self.themes)
 
         prompt = """
@@ -151,13 +211,15 @@ class StoryThemeGenerator:
         n_retry = 0
 
         while n_retry < 3:
-            try: 
+            try:
                 # Set up a parser + inject instructions into the prompt template.
                 parser = JsonOutputParser(pydantic_object=StoryTheme)
                 self.prompt = PromptTemplate(
                     template=prompt,
                     input_variables=["theme_context", "color_pallete"],
-                    partial_variables={"format_instructions": parser.get_format_instructions()},
+                    partial_variables={
+                        "format_instructions": parser.get_format_instructions()
+                    },
                 )
 
                 chain = self.prompt | self.llm | parser
@@ -165,14 +227,13 @@ class StoryThemeGenerator:
                     {"theme_context": self.proposed_theme, "color_pallete": themes}
                 )
 
-                if (('BackgroundColor' in self.response.keys())
-                    & ('FontColor' in self.response.keys())
-                    & ('FontFamily' in self.response.keys())):
+                if (
+                    ("BackgroundColor" in self.response.keys())
+                    & ("FontColor" in self.response.keys())
+                    & ("FontFamily" in self.response.keys())
+                ):
                     return self.response
-                    
+
             except OutputParserException as e:
                 n_retry += 1
                 continue
-            
-
-        
