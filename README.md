@@ -10,10 +10,10 @@ The project is organized as follows:
 ├── app.py                      # Main Flask application logic
 ├── requirements.txt            # Project dependencies
 ├── templates                   # HTML templates for web pages
-│   ├── base.html               # Base template for all pages
+│   ├── index.html               # Base template for all pages
 │   ├── context.html            # Form for context input
 │   ├── image.html              # Displays uploaded images
-│   ├── index.html              # Home page
+│   ├── home.html              # Home page
 │   ├── story.html              # Displays the generated story
 │   └── story_to_print.html     # Displays the story for print
 ├── static                      # Static assets 
