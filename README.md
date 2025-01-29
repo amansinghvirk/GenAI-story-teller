@@ -120,7 +120,7 @@ The application supports the following:
 
 # Deploying a Flask Application on Google Cloud Run with Vertex AI and Secret Manager
 
-This document outlines the steps to deploy a Flask application to Google Cloud Run, leveraging Google Cloud's Vertex AI for AI/ML capabilities and Secret Manager for secure credential storage. The deployment process is automated using a provided shell script (`SETUP_SCRIPT`).
+This document outlines the steps to deploy a Flask application to Google Cloud Run, leveraging Google Cloud's Vertex AI for AI/ML capabilities and Secret Manager for secure credential storage. The deployment process is automated using a provided shell script setup.sh
 
 ## Prerequisites
 
@@ -145,7 +145,7 @@ Follow these steps to deploy your application:
 
 **Step 1: Configure Environment Variables**
 
-Before executing `SETUP_SCRIPT`, ensure you have set correct values for below variables. You can set these variables in your terminal or directly in the script file.
+Before executing setup.sh, ensure you have set correct values for below variables. You can set these variables in your terminal or directly in the script file.
 
 *   **`PROJECT_ID`**: Your Google Cloud Project ID (e.g., `my-gcp-project`).
 *   **`REGION`**: Google Cloud Region to deploy to (e.g., `us-central1`).
@@ -167,19 +167,19 @@ You can set these variables in your terminal using:
    # and so on for other variables
    ```
 
-   or you can change these directly in the `SETUP_SCRIPT` file.
+   or you can change these directly in the setup.sh file.
 
-**Step 2:  Run the `SETUP_SCRIPT`**
+**Step 2:  Run the setup.sh`**
 
-Open your terminal, navigate to the root directory of your project (where your `SETUP_SCRIPT` is located), and run the script with execute permission:
+Open your terminal, navigate to the root directory of your project (where your setup.sh is located), and run the script with execute permission:
 
 ```bash
-chmod +x SETUP_SCRIPT
-./SETUP_SCRIPT
+chmod +x setup.sh
+./setup.sh
 ```
 **Note:** The script saves the service account's JSON credential file to a local path, specified by variable `LOCAL_CREDENTIALS_FILE`. This path will be used to create and save service account key file. Please make sure that the path exist and is accessible.
 
-**Step 3: Understanding the `SETUP_SCRIPT`**
+**Step 3: Understanding the setup.sh**
 
 The script performs the following actions:
 
