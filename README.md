@@ -65,9 +65,9 @@ The project is organized as follows:
 
     *   Ensure you have a Google Cloud project and have enabled the Generative AI API.
     *   Set up authentication as described in the [Google Cloud documentation](https://cloud.google.com/docs/authentication/getting-started)
-    *   Set the `GOOGLE_API_KEY` environment variable.
+    *   Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
         ```
-        export GOOGLE_API_KEY="YOUR_API_KEY"
+        export GOOGLE_APPLICATION_CREDENTIALS="YOUR_API_KEY"
         ```
     * Set the `GOOGLE_PROJECT_ID` environment variable.
         ```
